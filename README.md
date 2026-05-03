@@ -1,63 +1,112 @@
-# Astro Starter Kit: Blog
+# ashraf-bhuiyan.com
 
-```sh
-npm create astro@latest -- --template blog
+Personal website and technical blog — [ashraf-bhuiyan.com](https://ashraf-bhuiyan.com)
+
+Built with [Astro](https://astro.build), deployed via GitHub Actions to GitHub Pages.
+
+---
+
+## Building an LLM Inference Engine from Scratch
+
+A 15-part series teaching how production inference servers like [vLLM](https://github.com/vllm-project/vllm) and [SGLang](https://github.com/sgl-project/sglang) work by building one from scratch. Each post isolates one technique with a runnable Python implementation.
+
+### Series Architecture
+
+```
+                          ┌──────────────────────┐
+                          │   Blog 1             │
+                          │   Naive Inference    │
+                          │   ─ foundation ─     │
+                          └──────────┬───────────┘
+                                     │
+           ┌─────────────────────────┼─────────────────────────┐
+           │                         │                         │
+           ▼                         ▼                         ▼
+ ┌─────────────────────┐   ┌─────────────────────┐   ┌─────────────────────┐
+ │   INDEPENDENT       │   │   DEPENDENCY CHAIN  │   │   PARALLELISM       │
+ │   (toggle on/off)   │   │                     │   │   (pick per HW)     │
+ │                     │   │   3 Paged Attention  │   │                     │
+ │   2  Async Stream   │   │          │           │   │   9  Tensor ∥       │
+ │   7  Prefix Cache   │   │          ▼           │   │  10  Data ∥         │
+ │   8  Spec Decode    │   │   4 Cont. Batching   │   │  11  Expert ∥       │
+ │  12  CPU Offload    │   │       ┌──┴──┐        │   │                     │
+ │  14  Quantization   │   │       ▼     ▼        │   │  DP × TP × EP      │
+ │                     │   │    5 Async  6 Chunked│   │   = total GPUs      │
+ │                     │   │    Sched    Prefill  │   │                     │
+ └─────────┬───────────┘   └─────────┬───────────┘   └─────────┬───────────┘
+           │                         │                         │
+           └─────────────────────────┼─────────────────────────┘
+                                     │
+                          ┌──────────▼───────────┐
+                          │   Blog 13            │
+                          │   Disaggregated P/D  │
+                          │   (system arch)      │
+                          └──────────┬───────────┘
+                                     │
+                          ╔══════════▼═══════════╗
+                          ║   Blog 15            ║
+                          ║   Full Architecture  ║
+                          ║   (all combined)     ║
+                          ╚══════════════════════╝
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+### Posts
 
-Features:
+| # | Title | Key Concept |
+|---|-------|-------------|
+| 01 | The Simplest LLM Server | Autoregressive generation, KV cache, prefill vs decode |
+| 02 | Async Streaming with FastAPI | Non-blocking I/O, SSE streaming |
+| 03 | Paged Attention | Virtual memory for KV cache, block tables |
+| 04 | Continuous Batching | Dynamic batch formation, iteration-level scheduling |
+| 05 | Async Scheduling | Decoupled scheduler and model executor |
+| 06 | Chunked Prefill | Breaking long prefills into chunks |
+| 07 | Prefix Caching | Reusing KV cache across requests |
+| 08 | Speculative Decoding | Draft model acceleration |
+| 09 | Tensor Parallelism | Splitting model across GPUs |
+| 10 | Data Parallelism | Replicating model for throughput |
+| 11 | Expert Parallelism | MoE model distribution |
+| 12 | KV Cache CPU Offloading | Spilling KV cache to host memory |
+| 13 | Disaggregated Prefill-Decode | Separating prefill and decode phases |
+| 14 | Quantization | Reduced precision inference |
+| 15 | The Full Architecture | Combining all techniques |
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and Open Graph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+---
 
-## 🚀 Project Structure
+## Development
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+```bash
+npm install          # Install dependencies
+npm run dev          # Dev server at localhost:4321
+npm run build        # Production build to ./dist/
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Deployment
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Push to `main` triggers GitHub Actions (`.github/workflows/deploy.yml`):
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+```
+git push → GitHub Actions → astro build → GitHub Pages → ashraf-bhuiyan.com
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Adding a New Blog Post
 
-## 🧞 Commands
+Create `src/content/blog/NN-slug.md`:
 
-All commands are run from the root of the project, from a terminal:
+```markdown
+---
+title: "Part N: Title"
+description: "One-line description"
+pubDate: 2026-MM-DD
+series: "Building an LLM Inference Engine from Scratch"
+part: N
+tags: ["tag1", "tag2"]
+---
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Content here...
+```
 
-## 👀 Want to learn more?
+Then `git add`, `git commit`, `git push`. The homepage auto-groups posts by `series`.
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Adding a New Series
 
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+Use a different `series` value in the frontmatter — the homepage creates a new section automatically.
