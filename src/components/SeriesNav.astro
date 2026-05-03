@@ -1,0 +1,85 @@
+---
+interface Props {
+	currentPart: number;
+	totalParts: number;
+	prevSlug?: string;
+	prevTitle?: string;
+	nextSlug?: string;
+	nextTitle?: string;
+}
+
+const { currentPart, totalParts, prevSlug, prevTitle, nextSlug, nextTitle } = Astro.props;
+---
+
+<nav class="series-nav" aria-label="Series navigation">
+	<div class="series-info">
+		Part {currentPart} of {totalParts} in <strong>Building an LLM Inference Engine from Scratch</strong>
+	</div>
+	<div class="nav-links">
+		{prevSlug ? (
+			<a href={`/blog/${prevSlug}/`} class="nav-prev">
+				<span class="nav-label">Previous</span>
+				<span class="nav-title">{prevTitle}</span>
+			</a>
+		) : <div />}
+		{nextSlug ? (
+			<a href={`/blog/${nextSlug}/`} class="nav-next">
+				<span class="nav-label">Next</span>
+				<span class="nav-title">{nextTitle}</span>
+			</a>
+		) : <div />}
+	</div>
+</nav>
+
+<style>
+	.series-nav {
+		margin: 2.5em 0;
+		padding: 1.5em;
+		border: 1px solid var(--border);
+		border-radius: 8px;
+		background: var(--bg-secondary);
+	}
+	.series-info {
+		text-align: center;
+		margin-bottom: 1em;
+		font-size: 0.9em;
+		color: var(--text-secondary);
+	}
+	.nav-links {
+		display: flex;
+		justify-content: space-between;
+		gap: 1em;
+	}
+	.nav-links a {
+		display: flex;
+		flex-direction: column;
+		padding: 0.75em 1em;
+		border: 1px solid var(--border);
+		border-radius: 6px;
+		text-decoration: none;
+		max-width: 48%;
+		transition: border-color 0.2s;
+	}
+	.nav-links a:hover {
+		border-color: var(--accent);
+		text-decoration: none;
+	}
+	.nav-prev { align-items: flex-start; }
+	.nav-next { align-items: flex-end; margin-left: auto; }
+	.nav-label {
+		font-size: 0.8em;
+		color: var(--text-secondary);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+	.nav-title {
+		color: var(--accent);
+		font-weight: 600;
+		font-size: 0.95em;
+	}
+	@media (max-width: 720px) {
+		.nav-links { flex-direction: column; }
+		.nav-links a { max-width: 100%; }
+		.nav-next { align-items: flex-start; }
+	}
+</style>

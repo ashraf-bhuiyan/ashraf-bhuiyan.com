@@ -1,0 +1,106 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+
+const posts = (await getCollection('blog'))
+	.sort((a, b) => (a.data.part ?? 0) - (b.data.part ?? 0));
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Blog — ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<style>
+			.page-title {
+				margin-bottom: 0.5em;
+			}
+			.page-desc {
+				color: var(--text-secondary);
+				margin-bottom: 2em;
+			}
+			.posts {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			.posts li {
+				margin: 0;
+			}
+			.posts a {
+				display: flex;
+				gap: 1em;
+				padding: 1em;
+				border-radius: 8px;
+				text-decoration: none;
+				transition: background-color 0.15s;
+				align-items: baseline;
+			}
+			.posts a:hover {
+				background: var(--bg-secondary);
+				text-decoration: none;
+			}
+			.part-num {
+				font-size: 0.85em;
+				font-weight: 700;
+				color: var(--text-secondary);
+				min-width: 2.5em;
+				flex-shrink: 0;
+			}
+			.post-info { flex: 1; }
+			.post-title {
+				font-weight: 600;
+				color: rgb(var(--black));
+				font-size: 1.05em;
+			}
+			.post-desc {
+				color: var(--text-secondary);
+				font-size: 0.88em;
+				margin-top: 0.25em;
+				line-height: 1.5;
+			}
+			.post-tags {
+				display: flex;
+				gap: 0.4em;
+				margin-top: 0.4em;
+				flex-wrap: wrap;
+			}
+			.tag {
+				font-size: 0.75em;
+				padding: 0.15em 0.5em;
+				background: var(--bg-secondary);
+				border: 1px solid var(--border);
+				border-radius: 4px;
+				color: var(--text-secondary);
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1 class="page-title">All Posts</h1>
+			<p class="page-desc">Building an LLM Inference Engine from Scratch</p>
+			<ul class="posts">
+				{posts.map((post) => (
+					<li>
+						<a href={`/blog/${post.id}/`}>
+							{post.data.part && <span class="part-num">{String(post.data.part).padStart(2, '0')}</span>}
+							<div class="post-info">
+								<div class="post-title">{post.data.title}</div>
+								<div class="post-desc">{post.data.description}</div>
+								{post.data.tags && (
+									<div class="post-tags">
+										{post.data.tags.map(tag => <span class="tag">{tag}</span>)}
+									</div>
+								)}
+							</div>
+						</a>
+					</li>
+				))}
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>

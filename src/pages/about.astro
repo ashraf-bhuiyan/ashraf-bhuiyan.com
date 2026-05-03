@@ -1,0 +1,63 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`About — ${SITE_TITLE}`} description="About Ashraf Bhuiyan and this blog series." />
+		<style>
+			.about-content {
+				max-width: 660px;
+			}
+			.about-content h1 {
+				margin-bottom: 1em;
+			}
+			.about-content h2 {
+				border-bottom: none;
+				padding-bottom: 0;
+				margin-top: 2em;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="about-content">
+				<h1>About</h1>
+				<p>
+					I'm Ashraf Bhuiyan. This site hosts my technical writing, starting with a 15-part series
+					on building an LLM inference engine from scratch.
+				</p>
+
+				<h2>About the Series</h2>
+				<p>
+					<strong>Building an LLM Inference Engine from Scratch</strong> teaches how production
+					inference servers like <a href="https://github.com/vllm-project/vllm">vLLM</a> and
+					<a href="https://github.com/sgl-project/sglang">SGLang</a> work by isolating each
+					technique into a standalone blog post with a runnable code implementation.
+				</p>
+				<p>
+					Each post is 200-800 lines of Python that you can read, run, and modify. By the end,
+					you'll understand every major subsystem well enough to navigate the real codebase,
+					debug production issues, or contribute upstream.
+				</p>
+
+				<h2>Source Code</h2>
+				<p>
+					All code for the series is available on
+					<a href="https://github.com/ashraf-bhuiyan">GitHub</a>.
+				</p>
+
+				<h2>Contact</h2>
+				<p>
+					Find me on <a href="https://github.com/ashraf-bhuiyan">GitHub</a>.
+				</p>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>

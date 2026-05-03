@@ -1,0 +1,93 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import SeriesNav from '../components/SeriesNav.astro';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate, part } = Astro.props;
+
+const allPosts = (await getCollection('blog'))
+	.filter(p => p.data.series)
+	.sort((a, b) => (a.data.part ?? 0) - (b.data.part ?? 0));
+
+const currentIndex = allPosts.findIndex(p => p.data.part === part);
+const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			main {
+				width: calc(100% - 2em);
+				max-width: 100%;
+				margin: 0;
+			}
+			.prose {
+				width: 760px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+			}
+			.post-header {
+				margin-bottom: 2em;
+				padding-bottom: 1em;
+				border-bottom: 1px solid var(--border);
+			}
+			.post-header h1 {
+				margin: 0 0 0.5em 0;
+				font-size: 2em;
+				line-height: 1.2;
+			}
+			.post-meta {
+				display: flex;
+				align-items: center;
+				gap: 1em;
+				color: var(--text-secondary);
+				font-size: 0.9em;
+			}
+			.last-updated-on {
+				font-style: italic;
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<article>
+				<div class="prose">
+					<div class="post-header">
+						<h1>{title}</h1>
+						<div class="post-meta">
+							<FormattedDate date={pubDate} />
+							{updatedDate && (
+								<span class="last-updated-on">
+									Updated <FormattedDate date={updatedDate} />
+								</span>
+							)}
+						</div>
+					</div>
+					<slot />
+					{part && (
+						<SeriesNav
+							currentPart={part}
+							totalParts={allPosts.length}
+							prevSlug={prevPost?.id}
+							prevTitle={prevPost?.data.title}
+							nextSlug={nextPost?.id}
+							nextTitle={nextPost?.data.title}
+						/>
+					)}
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>

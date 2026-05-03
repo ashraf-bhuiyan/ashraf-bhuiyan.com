@@ -1,0 +1,116 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const posts = (await getCollection('blog'))
+	.filter(p => p.data.series)
+	.sort((a, b) => (a.data.part ?? 0) - (b.data.part ?? 0));
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			.hero {
+				text-align: center;
+				padding: 3em 1em 2em;
+			}
+			.hero h1 {
+				font-size: 2.2em;
+				margin-bottom: 0.3em;
+				line-height: 1.2;
+			}
+			.hero .subtitle {
+				font-size: 1.1em;
+				color: var(--text-secondary);
+				max-width: 600px;
+				margin: 0 auto 1em;
+				line-height: 1.5;
+			}
+			.hero .frameworks {
+				font-size: 0.95em;
+				color: var(--text-secondary);
+			}
+			.series-list {
+				list-style: none;
+				padding: 0;
+				margin: 2em 0;
+			}
+			.series-list li {
+				margin: 0;
+			}
+			.series-list a {
+				display: flex;
+				gap: 1em;
+				padding: 1em;
+				border-radius: 8px;
+				text-decoration: none;
+				transition: background-color 0.15s;
+				align-items: baseline;
+			}
+			.series-list a:hover {
+				background: var(--bg-secondary);
+				text-decoration: none;
+			}
+			.part-num {
+				font-size: 0.85em;
+				font-weight: 700;
+				color: var(--text-secondary);
+				min-width: 2.5em;
+				flex-shrink: 0;
+			}
+			.post-info {
+				flex: 1;
+			}
+			.post-title {
+				font-weight: 600;
+				color: rgb(var(--black));
+				font-size: 1.05em;
+			}
+			.post-desc {
+				color: var(--text-secondary);
+				font-size: 0.88em;
+				margin-top: 0.25em;
+				line-height: 1.5;
+			}
+			@media (max-width: 720px) {
+				.hero h1 { font-size: 1.6em; }
+				.series-list a { gap: 0.75em; padding: 0.75em; }
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="hero">
+				<h1>Building an LLM Inference Engine from Scratch</h1>
+				<p class="subtitle">
+					A 15-part series teaching how production inference servers work by building one from scratch.
+					Each post isolates one technique with a runnable Python implementation.
+				</p>
+				<p class="frameworks">
+					Learn the internals of <strong>vLLM</strong> and <strong>SGLang</strong>
+				</p>
+			</div>
+
+			<ul class="series-list">
+				{posts.map((post) => (
+					<li>
+						<a href={`/blog/${post.id}/`}>
+							<span class="part-num">{String(post.data.part).padStart(2, '0')}</span>
+							<div class="post-info">
+								<div class="post-title">{post.data.title.replace(/^Part \d+: /, '')}</div>
+								<div class="post-desc">{post.data.description}</div>
+							</div>
+						</a>
+					</li>
+				))}
+			</ul>
+		</main>
+		<Footer />
+	</body>
+</html>
