@@ -106,6 +106,25 @@ const posts = (await getCollection('blog'))
 			.arch-diagram a:hover rect {
 				stroke: var(--accent);
 			}
+			.series-list {
+				margin: 0 0 2em;
+			}
+			.series-list ol {
+				padding-left: 1.8em;
+				margin: 0;
+			}
+			.series-list li {
+				padding: 0.25em 0;
+				font-size: 0.92em;
+				line-height: 1.6;
+			}
+			.series-list a {
+				font-weight: 600;
+			}
+			.list-desc {
+				color: var(--text-secondary);
+				font-size: 0.9em;
+			}
 			@media (max-width: 720px) {
 				.profile {
 					padding: 2em 0 1.5em;
@@ -116,6 +135,9 @@ const posts = (await getCollection('blog'))
 				}
 				.profile-info h1 {
 					font-size: 1.3em;
+				}
+				.list-desc {
+					display: none;
 				}
 			}
 		</style>
@@ -270,6 +292,53 @@ const posts = (await getCollection('blog'))
 						<text x="360" y="401" text-anchor="middle" fill="currentColor" font-size="9" opacity="0.5">all combined</text>
 					</a>
 				</svg>
+			</div>
+
+			<!-- Series: LoRA & QLoRA -->
+			<div class="series-header">
+				<h3><a href="/blog/lora-01-fundamentals/">LoRA & QLoRA in vLLM</a></h3>
+				<p class="series-desc">6 parts &middot; From LoRA math to production multi-adapter serving</p>
+			</div>
+			<div class="series-list">
+				<ol>
+					<li><a href="/blog/lora-01-fundamentals/">LoRA Fundamentals</a> <span class="list-desc">&mdash; B&times;A decomposition, rank, alpha, target modules</span></li>
+					<li><a href="/blog/lora-02-qlora/">QLoRA</a> <span class="list-desc">&mdash; NF4 quantization, 4-bit base + full-precision adapters</span></li>
+					<li><a href="/blog/lora-03-serving/">Serving a LoRA Adapter</a> <span class="list-desc">&mdash; --enable-lora, LoRARequest, on-the-fly forward pass</span></li>
+					<li><a href="/blog/lora-04-multi-lora/">Multi-LoRA Serving</a> <span class="list-desc">&mdash; adapter cache, LRU eviction, routing patterns</span></li>
+					<li><a href="/blog/lora-05-kernels/">Kernel Internals</a> <span class="list-desc">&mdash; SGMV/BGMV, PunicaWrapper, weight stacking</span></li>
+					<li><a href="/blog/lora-06-production/">Production at Scale</a> <span class="list-desc">&mdash; S-LoRA, TP/DP composition, tuning checklist</span></li>
+				</ol>
+			</div>
+
+			<!-- Series: Embeddings, Pooling & Rerankers -->
+			<div class="series-header">
+				<h3><a href="/blog/embed-01-fundamentals/">Embeddings, Pooling & Rerankers in vLLM</a></h3>
+				<p class="series-desc">5 parts &middot; Embedding fundamentals through high-throughput optimization</p>
+			</div>
+			<div class="series-list">
+				<ol>
+					<li><a href="/blog/embed-01-fundamentals/">Embedding Fundamentals</a> <span class="list-desc">&mdash; bi-encoders, contrastive learning, similarity metrics</span></li>
+					<li><a href="/blog/embed-02-pooling/">Pooling Strategies</a> <span class="list-desc">&mdash; CLS, mean, last-token, normalization pitfalls</span></li>
+					<li><a href="/blog/embed-03-serving/">Serving Embeddings</a> <span class="list-desc">&mdash; --task embed, /v1/embeddings API, PoolingParams</span></li>
+					<li><a href="/blog/embed-04-rerankers/">Rerankers & Cross-Encoders</a> <span class="list-desc">&mdash; --task score, retrieve-then-rerank, reward models</span></li>
+					<li><a href="/blog/embed-05-optimization/">Throughput Optimization</a> <span class="list-desc">&mdash; saturation curves, prefix caching, benchmarking</span></li>
+				</ol>
+			</div>
+
+			<!-- Series: Vision, Language & Audio -->
+			<div class="series-header">
+				<h3><a href="/blog/mm-01-vlm-architecture/">Vision, Language & Audio Models in vLLM</a></h3>
+				<p class="series-desc">6 parts &middot; VLM architecture through multi-modal serving optimization</p>
+			</div>
+			<div class="series-list">
+				<ol>
+					<li><a href="/blog/mm-01-vlm-architecture/">VLM Architecture Primer</a> <span class="list-desc">&mdash; vision encoders, projection layers, model families</span></li>
+					<li><a href="/blog/mm-02-serving-vlms/">Serving VLMs</a> <span class="list-desc">&mdash; OpenAI vision API, image input, preprocessing</span></li>
+					<li><a href="/blog/mm-03-multi-image-video/">Multi-Image & Video</a> <span class="list-desc">&mdash; token explosion, frame sampling, memory management</span></li>
+					<li><a href="/blog/mm-04-audio-models/">Audio & Speech Models</a> <span class="list-desc">&mdash; Whisper encoder, mel spectrograms, Qwen2-Audio</span></li>
+					<li><a href="/blog/mm-05-internals/">Multi-Modal Internals</a> <span class="list-desc">&mdash; registry, plugins, processor, placeholder replacement</span></li>
+					<li><a href="/blog/mm-06-optimization/">Optimization</a> <span class="list-desc">&mdash; prefix caching, chunked prefill, TP, resolution tuning</span></li>
+				</ol>
 			</div>
 		</main>
 		<Footer />

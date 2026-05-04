@@ -2,18 +2,19 @@
 interface Props {
 	currentPart: number;
 	totalParts: number;
+	seriesName: string;
 	prevSlug?: string;
 	prevTitle?: string;
 	nextSlug?: string;
 	nextTitle?: string;
 }
 
-const { currentPart, totalParts, prevSlug, prevTitle, nextSlug, nextTitle } = Astro.props;
+const { currentPart, totalParts, seriesName, prevSlug, prevTitle, nextSlug, nextTitle } = Astro.props;
 ---
 
 <nav class="series-nav" aria-label="Series navigation">
 	<div class="series-info">
-		Part {currentPart} of {totalParts} in <strong>Building an LLM Inference Engine from Scratch</strong>
+		Part {currentPart} of {totalParts} in <strong>{seriesName}</strong>
 	</div>
 	<div class="nav-links">
 		{prevSlug ? (

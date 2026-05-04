@@ -9,15 +9,15 @@ import SeriesNav from '../components/SeriesNav.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, part } = Astro.props;
+const { title, description, pubDate, updatedDate, part, series } = Astro.props;
 
-const allPosts = (await getCollection('blog'))
-	.filter(p => p.data.series)
+const seriesPosts = (await getCollection('blog'))
+	.filter(p => p.data.series && p.data.series === series)
 	.sort((a, b) => (a.data.part ?? 0) - (b.data.part ?? 0));
 
-const currentIndex = allPosts.findIndex(p => p.data.part === part);
-const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
-const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+const currentIndex = seriesPosts.findIndex(p => p.data.part === part);
+const prevPost = currentIndex > 0 ? seriesPosts[currentIndex - 1] : null;
+const nextPost = currentIndex < seriesPosts.length - 1 ? seriesPosts[currentIndex + 1] : null;
 ---
 
 <html lang="en">
@@ -75,10 +75,11 @@ const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1]
 						</div>
 					</div>
 					<slot />
-					{part && (
+					{part && series && (
 						<SeriesNav
 							currentPart={part}
-							totalParts={allPosts.length}
+							totalParts={seriesPosts.length}
+							seriesName={series}
 							prevSlug={prevPost?.id}
 							prevTitle={prevPost?.data.title}
 							nextSlug={nextPost?.id}
