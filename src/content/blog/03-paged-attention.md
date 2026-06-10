@@ -191,7 +191,7 @@ Key architectural differences:
 
 ## The Implementation
 
-The complete implementation is in [03_paged_attention.py](../code-blog-simple-vllm/03_paged_attention.py) (~290 lines). Here are the key parts:
+The complete implementation is in [03_paged_attention.py](https://github.com/ashraf-bhuiyan/code-blog-simple-vllm/blob/main/03_paged_attention.py) (~290 lines). Here are the key parts:
 
 ### The Paged KV Cache
 

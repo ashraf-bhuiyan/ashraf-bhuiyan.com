@@ -210,7 +210,7 @@ Key details:
 
 ## The Implementation
 
-The complete implementation is in [06_chunked_prefill.py](../code-blog-simple-vllm/06_chunked_prefill.py) (~500 lines). Key additions over Blog 4:
+The complete implementation is in [06_chunked_prefill.py](https://github.com/ashraf-bhuiyan/code-blog-simple-vllm/blob/main/06_chunked_prefill.py) (~500 lines). Key additions over Blog 4:
 
 ### Chunked Scheduler
 

@@ -197,7 +197,7 @@ RadixAttention tree:
 
 ## The Implementation
 
-The complete implementation is in [07_prefix_caching.py](../code-blog-simple-vllm/07_prefix_caching.py) (~400 lines).
+The complete implementation is in [07_prefix_caching.py](https://github.com/ashraf-bhuiyan/code-blog-simple-vllm/blob/main/07_prefix_caching.py) (~400 lines).
 
 ### Hash Chain Computation
 

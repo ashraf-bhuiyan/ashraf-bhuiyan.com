@@ -248,7 +248,7 @@ vLLM (async with streams):
 
 ## The Implementation
 
-The complete implementation is in [12_kv_cpu_offloading.py](../code-blog-simple-vllm/12_kv_cpu_offloading.py) (~600 lines).
+The complete implementation is in [12_kv_cpu_offloading.py](https://github.com/ashraf-bhuiyan/code-blog-simple-vllm/blob/main/12_kv_cpu_offloading.py) (~600 lines).
 
 ### Two-Tier Cache Setup
 

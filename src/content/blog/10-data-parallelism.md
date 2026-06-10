@@ -238,7 +238,7 @@ Key details:
 
 ## The Implementation
 
-The complete implementation is in [10_data_parallelism.py](../code-blog-simple-vllm/10_data_parallelism.py) (~300 lines).
+The complete implementation is in [10_data_parallelism.py](https://github.com/ashraf-bhuiyan/code-blog-simple-vllm/blob/main/10_data_parallelism.py) (~300 lines).
 
 ### Inference Worker
 

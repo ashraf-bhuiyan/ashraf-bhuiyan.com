@@ -219,7 +219,7 @@ Key differences:
 
 ## The Implementation
 
-The complete implementation is in [04_continuous_batching.py](../code-blog-simple-vllm/04_continuous_batching.py) (~400 lines). Key parts:
+The complete implementation is in [04_continuous_batching.py](https://github.com/ashraf-bhuiyan/code-blog-simple-vllm/blob/main/04_continuous_batching.py) (~400 lines). Key parts:
 
 ### Sequence Tracking
 

@@ -285,7 +285,7 @@ Key details in production:
 
 ## The Implementation
 
-The complete implementation is in [14_quantization.py](../code-blog-simple-vllm/14_quantization.py) (~690 lines).
+The complete implementation is in [14_quantization.py](https://github.com/ashraf-bhuiyan/code-blog-simple-vllm/blob/main/14_quantization.py) (~690 lines).
 
 ### Quantization Primitives
 

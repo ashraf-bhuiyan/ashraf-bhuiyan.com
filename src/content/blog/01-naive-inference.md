@@ -197,7 +197,7 @@ The key difference: vLLM and SGLang replace HuggingFace's simple `DynamicCache` 
 
 ## The Implementation
 
-The complete implementation is in [01_naive_inference.py](../code-blog-simple-vllm/01_naive_inference.py) (~130 lines). Here are the key parts:
+The complete implementation is in [01_naive_inference.py](https://github.com/ashraf-bhuiyan/code-blog-simple-vllm/blob/main/01_naive_inference.py) (~130 lines). Here are the key parts:
 
 ### The Engine
 

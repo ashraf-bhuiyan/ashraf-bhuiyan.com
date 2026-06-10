@@ -206,7 +206,7 @@ Key architectural details:
 
 ## The Implementation
 
-The complete implementation is in [05_async_scheduling.py](../code-blog-simple-vllm/05_async_scheduling.py) (~600 lines). It contains both a `SyncEngine` (Blog 4 baseline) and an `AsyncEngine` (async pattern) for comparison.
+The complete implementation is in [05_async_scheduling.py](https://github.com/ashraf-bhuiyan/code-blog-simple-vllm/blob/main/05_async_scheduling.py) (~600 lines). It contains both a `SyncEngine` (Blog 4 baseline) and an `AsyncEngine` (async pattern) for comparison.
 
 ### SyncEngine (Baseline)
 

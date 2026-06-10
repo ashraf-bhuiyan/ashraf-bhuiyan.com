@@ -228,7 +228,7 @@ Key details:
 
 ## The Implementation
 
-The complete implementation is in [13_disaggregated_serving.py](../code-blog-simple-vllm/13_disaggregated_serving.py) (~440 lines).
+The complete implementation is in [13_disaggregated_serving.py](https://github.com/ashraf-bhuiyan/code-blog-simple-vllm/blob/main/13_disaggregated_serving.py) (~440 lines).
 
 ### KV Connector
 

@@ -173,7 +173,7 @@ Key architectural difference: vLLM V1 runs the engine in a **separate process** 
 
 ## The Implementation
 
-The complete implementation is in [02_async_streaming.py](../code-blog-simple-vllm/02_async_streaming.py) (~200 lines). Key additions over Blog 1:
+The complete implementation is in [02_async_streaming.py](https://github.com/ashraf-bhuiyan/code-blog-simple-vllm/blob/main/02_async_streaming.py) (~200 lines). Key additions over Blog 1:
 
 ### Pydantic Request Validation
 

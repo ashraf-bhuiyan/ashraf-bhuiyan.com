@@ -179,7 +179,7 @@ Key details:
 
 ## The Implementation
 
-The complete implementation is in [11_expert_parallelism.py](../code-blog-simple-vllm/11_expert_parallelism.py) (~350 lines).
+The complete implementation is in [11_expert_parallelism.py](https://github.com/ashraf-bhuiyan/code-blog-simple-vllm/blob/main/11_expert_parallelism.py) (~350 lines).
 
 ### Router
 

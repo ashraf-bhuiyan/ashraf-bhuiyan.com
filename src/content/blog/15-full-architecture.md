@@ -556,4 +556,4 @@ Key interactions:
 - [Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism](https://arxiv.org/abs/1909.08053) — TP (Blog 9)
 - [DistServe: Disaggregating Prefill and Decoding](https://arxiv.org/abs/2401.09670) — disaggregated serving (Blog 13)
 
-**This series:** [All code on GitHub](../code-blog-simple-vllm/)
+**This series:** [All code on GitHub](https://github.com/ashraf-bhuiyan/code-blog-simple-vllm)

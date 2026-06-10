@@ -263,7 +263,7 @@ Key differences:
 
 ## The Implementation
 
-The complete implementation is in [09_tensor_parallelism.py](../code-blog-simple-vllm/09_tensor_parallelism.py) (~280 lines).
+The complete implementation is in [09_tensor_parallelism.py](https://github.com/ashraf-bhuiyan/code-blog-simple-vllm/blob/main/09_tensor_parallelism.py) (~280 lines).
 
 ### Column-Parallel Linear
 

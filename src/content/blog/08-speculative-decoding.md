@@ -269,7 +269,7 @@ A key challenge in production: speculative decoding requires knowing draft token
 
 ## The Implementation
 
-The complete implementation is in [08_speculative_decoding.py](../code-blog-simple-vllm/08_speculative_decoding.py) (~350 lines).
+The complete implementation is in [08_speculative_decoding.py](https://github.com/ashraf-bhuiyan/code-blog-simple-vllm/blob/main/08_speculative_decoding.py) (~350 lines).
 
 ### N-Gram Drafter
 
